@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<hr/>
+<h1> File Uploader</h1>
+
+<form method="POST" enctype="multipart/form-data" action="/upload">
+    <input type="file" name="file"><br>
+    <input type="submit" value="Upload">
+</form>
+
+<hr/>
+<h1>Async File Uploader</h1>
+
+<form method="POST" enctype="multipart/form-data" action="/asyncupload">
+    <input type="file" name="file"><br>
+    <input type="submit" value="Upload">
+</form>
+
+<hr/>
+<h1>Async File Uploader Servlet </h1>
+
+<form method="POST" enctype="multipart/form-data" action="/asyncupload">
+    <input type="file" name="file"><br>
+    <input type="submit" value="Upload">
+</form>
+</body>
+</html>
