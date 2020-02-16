@@ -1,28 +1,38 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
-<hr/>
-<h1> File Uploader</h1>
 
-<form method="POST" enctype="multipart/form-data" action="/upload">
-    <input type="file" name="file"><br>
-    <input type="submit" value="Upload">
-</form>
+	<p th:text="'Hello, ' + ${name} + '!'" />
 
-<hr/>
-<h1>Async File Uploader</h1>
+	<hr />
+	<h1>XLSX File uploader</h1>
 
-<form method="POST" enctype="multipart/form-data" action="/asyncupload">
-    <input type="file" name="file"><br>
-    <input type="submit" value="Upload">
-</form>
+	<form method="POST" enctype="multipart/form-data" action="/upload_xlsx">
+		<input type="file" name="file"><br> <input type="submit"
+			value="Upload">
+	</form>
+	<hr />
+	<h1>Binary File uploader</h1>
 
-<hr/>
-<h1>Async File Uploader Servlet </h1>
+	<form method="POST" enctype="multipart/form-data" action="/upload_1">
+		<input type="file" name="file"><br> <input type="submit"
+			value="Upload">
+	</form>
+	<hr />
+	<h1>Multiple File Uploader</h1>
 
-<form method="POST" enctype="multipart/form-data" action="/asyncupload">
-    <input type="file" name="file"><br>
-    <input type="submit" value="Upload">
-</form>
+	<form method="POST" enctype="multipart/form-data" action="/upload_2">
+		<input type="file" name="file"><br> <input type="submit"
+			value="Upload">
+	</form>
+	<hr />
+	<h1>Async File Uploader</h1>
+
+	<form method="POST" enctype="multipart/form-data" action="/asyncupload">
+		<input type="file" name="file"><br> <input type="submit"
+			value="Upload">
+	</form>
+
+	<hr />
 </body>
 </html>

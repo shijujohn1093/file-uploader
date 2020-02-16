@@ -8,18 +8,27 @@ import java.io.OutputStream;
 import javax.servlet.AsyncContext;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.tomcat.util.http.fileupload.FileItemIterator;
 import org.apache.tomcat.util.http.fileupload.FileItemStream;
 import org.apache.tomcat.util.http.fileupload.FileUploadException;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.thengara.fileuploader.service.FileuploadService;
+
 @Controller
 public class FileUploadAsyncController {
+
+	private final FileuploadService fileuploadService;
+
+	@Autowired
+	FileUploadAsyncController(FileuploadService fileuploadService) {
+		this.fileuploadService = fileuploadService;
+	}
 
 	@RequestMapping(value = "/asyncupload", method = RequestMethod.POST)
 	public @ResponseBody Response<String> upload(HttpServletRequest request) {
@@ -29,7 +38,8 @@ public class FileUploadAsyncController {
 		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 		if (!isMultipart) {
 			// Inform user about invalid request
-			Response<String> responseObject = new Response<String>(false, "Not a multipart request.", "");
+			Response<String> responseObject = new Response<String>(false,
+					"Not a multipart request.", "");
 			return responseObject;
 		}
 
@@ -47,10 +57,9 @@ public class FileUploadAsyncController {
 					if (!item.isFormField()) {
 						String filename = item.getName();
 						// Process the input stream
-						OutputStream out = new FileOutputStream("uploaded-" + filename);
-						IOUtils.copy(stream, out);
-						stream.close();
-						out.close();
+						OutputStream out = new FileOutputStream(
+								"uploaded-" + filename);
+						fileuploadService.uploadFile(stream, out);
 					}
 				}
 			} catch (FileUploadException e) {
@@ -64,7 +73,8 @@ public class FileUploadAsyncController {
 
 		long endtime = System.currentTimeMillis();
 
-		return new Response<String>(true, "Success", (endtime - startTime) / 1000 + " Seconds");
+		return new Response<String>(true, "Success",
+				(endtime - startTime) / 1000 + " Seconds");
 	}
 
 }

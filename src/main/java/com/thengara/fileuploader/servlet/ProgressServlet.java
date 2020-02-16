@@ -1,4 +1,4 @@
-package com.thengara.tutorial.servlet;
+package com.thengara.fileuploader.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -9,22 +9,25 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-//@WebServlet("/progress")
+@WebServlet("/progress")
 public class ProgressServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	public ProgressServlet() {
 	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 
 		PrintWriter printWriter = response.getWriter();
-		printWriter.println("<html><head><title>Progress Servlet</title></head><body>");
-		printWriter.println("Entering doGet() ==> " + Thread.currentThread().getName() + "<br/>");
+		printWriter.println(
+				"<html><head><title>Progress Servlet</title></head><body>");
+		printWriter.println("Entering doGet() ==> "
+				+ Thread.currentThread().getName() + "<br/>");
 		printWriter.println("<span id='myspan'> Initial </span><br/>");
-		printWriter.println("<progress id='progress' max='100'></progress><br/>");
+		printWriter
+				.println("<progress id='progress' max='100'></progress><br/>");
 		int i = 0;
 
 		String running = "Running";
@@ -33,12 +36,15 @@ public class ProgressServlet extends HttpServlet {
 			try {
 				StringBuilder builder = new StringBuilder();
 				builder.append(running);
-				printWriter.println("<script>document.getElementById('progress').value=\"" + i++ + "\";</script>");
+				printWriter.println(
+						"<script>document.getElementById('progress').value=\""
+								+ i++ + "\";</script>");
 				printWriter.flush();
 				for (int j = 0; j < 5; j++) {
 					builder.append(".");
 					printWriter.println(
-							"<script>document.getElementById('myspan').innerHTML=\"" + builder.toString() + "\";</script>");
+							"<script>document.getElementById('myspan').innerHTML=\""
+									+ builder.toString() + "\";</script>");
 					printWriter.flush();
 					Thread.sleep(20);
 				}
@@ -47,10 +53,14 @@ public class ProgressServlet extends HttpServlet {
 			}
 
 		}
-		printWriter.println("<script>document.getElementById('myspan').innerHTML=\"Done\";</script>");
-		printWriter.println("<script>document.getElementById('progress').style.display='none';<script>");
-		printWriter.println("[time consuming and generated and returned result]<br>");
-		printWriter.println("Entering doGet() ==> " + Thread.currentThread().getName() + "<br/>");
+		printWriter.println(
+				"<script>document.getElementById('myspan').innerHTML=\"Done\";</script>");
+		printWriter.println(
+				"<script>document.getElementById('progress').style.display='none';<script>");
+		printWriter.println(
+				"[time consuming and generated and returned result]<br>");
+		printWriter.println("Entering doGet() ==> "
+				+ Thread.currentThread().getName() + "<br/>");
 		printWriter.println("</body></html>");
 
 	}
